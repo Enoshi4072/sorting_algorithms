@@ -1,0 +1,28 @@
+Sorting algorithms and Big O
+Meant ro be done by groups of two
+Objectives
+- One to know at least four sorting algos
+- What is the Big O
+- How to select the best sorting algo for a given input
+- What is a stable sorting algo
+
+Editors
+-vi, vim, emacs
+-files to be compiled in ubuntu
+- Files end with a new line
+- Readme.md at the root of the folder
+- betty style to be adhered to
+- No more than 5 functions per file
+- No use of the standard library
+- You ca use the main.c files
+- prototypes to be included in the sort.h file
+- Push the header file
+- Guard all the header files
+- Do not sort list with two elements
+
+More info
+- Two functions are provided print_array and print_list
+- They will be used during compilation and correction
+- Declare them in your header file
+- Use a the struct data structure provided
+- 
