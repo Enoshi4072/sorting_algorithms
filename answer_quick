@@ -1,0 +1,45 @@
+#include "sort.h"
+
+void swap_ints(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+int lomuto_partition(int *array, size_t size, int left, int right) {
+    int *pivot, above, below;
+
+    pivot = array + right;
+    for (above = below = left; below < right; below++) {
+        if (array[below] < *pivot) {
+            if (above < below) {
+                swap_ints(array + below, array + above);
+                print_array(array, size);
+            }
+            above++;
+        }
+    }
+
+    if (array[above] > *pivot) {
+        swap_ints(array + above, pivot);
+        print_array(array, size);
+    }
+
+    return above;
+}
+
+void quick_sort_helper(int *array, size_t size, int left, int right) {
+    if (left < right) {
+        int pi = lomuto_partition(array, size, left, right);
+
+        quick_sort_helper(array, size, left, pi - 1);
+        quick_sort_helper(array, size, pi + 1, right);
+    }
+}
+
+void quick_sort(int *array, size_t size) {
+    if (array == NULL || size <= 1)
+        return;
+
+    quick_sort_helper(array, size, 0, size - 1);
+}
+
