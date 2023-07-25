@@ -11,7 +11,6 @@
 
 void counting_sort(int *array, size_t size)
 {
-
 int max_value;
 int *countArray, *final_Array;
 int j;
@@ -35,7 +34,6 @@ return;
 final_Array = (int *)malloc(size * sizeof(int));
 if (final_Array == NULL)
 {
-	free(countArray);
 	return;
 }
 /* Initialize the array */
@@ -46,16 +44,16 @@ countArray[j] = 0;
 /* Count occurrences of each element */
 for (i = 0; i < size; i++)
 {
-countArray[array[i]] += 1;
+countArray[array[i]]++;
 }
 
-for (j = 0; j < (max_value + 1); j++)
+for (j = 1; j <= max_value; j++)
 {
 	countArray[j] += countArray[j - 1];
 }
 
 /* Print countArray */
-print_array(countArray, max_value);
+print_array(countArray, max_value + 1);
 
 /* Place elements in sorted order */
 for (i = 0; i < size; i++)
