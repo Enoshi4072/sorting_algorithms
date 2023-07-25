@@ -11,13 +11,12 @@
 
 void counting_sort(int *array, size_t size)
 {
-/* Find the maximum value in the array */
-int max_value;
-int *countArray;
-int j;
-int output_index;
-size_t i;
 
+int max_value;
+int *countArray, *final_Array;
+int j;
+size_t i;
+/* Maximum value */
 max_value = array[0];
 for (i = 1; i < size; i++)
 {
@@ -27,13 +26,19 @@ max_value = array[i];
 }
 }
 
-/* Allocate and initialize the countArray */
+/* Allocate memory */
 countArray = (int *)malloc((max_value + 1) * sizeof(int));
 if (countArray == NULL)
 {
 return;
 }
-
+final_Array = (int *)malloc(size * sizeof(int));
+if (final_Array == NULL)
+{
+	free(countArray);
+	return;
+}
+/* Initialize the array */
 for (j = 0; j <= max_value; j++)
 {
 countArray[j] = 0;
@@ -41,22 +46,30 @@ countArray[j] = 0;
 /* Count occurrences of each element */
 for (i = 0; i < size; i++)
 {
-countArray[array[i]]++;
+countArray[array[i]] += 1;
 }
+
+for (j = 0; j < (max_value + 1); j++)
+{
+	countArray[j] += countArray[j - 1];
+}
+
 /* Print countArray */
 print_array(countArray, max_value);
 
 /* Place elements in sorted order */
-output_index = 0;
-for (j = 0; j <= max_value; j++)
+for (i = 0; i < size; i++)
 {
-while (countArray[j] > 0)
+	final_Array[countArray[array[i]] - 1] = array[i];
+	countArray[array[i]] -= 1;
+}
+
+for (i = 0; i < size; i++)
 {
-array[output_index] = j;
-output_index++;
-countArray[j]--;
+	array[i] = final_Array[i];
 }
-}
+
 /* Free allocated memory */
 free(countArray);
+free(final_Array);
 }
